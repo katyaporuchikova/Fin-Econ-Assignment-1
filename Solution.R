@@ -61,10 +61,30 @@ CAR_MA %>%
 # in means for both sub-samples and the associated p-value 
 # (t-test; text book page 119-120).
 
-CAR_MA %>%
-  group_by(all_stock) %>%
-  summarise(Avg_CAR_bidder = mean(carbidder),
-            Share_of_deals_with_private = mean(private))
+vars.for.model <- names(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy', 
+                                                     'private', 'all_stock')])
+
+difference.means <- data.frame(matrix(NA,    # Create empty data frame
+                                      nrow = 4,
+                                      ncol = length(vars.for.model)))
+
+row.names(difference.means) <- c('all.stock', 'not.all.stock', 'differece', 
+                                 't-test')
+names(difference.means) <- vars.for.model
+
+difference.means[1,] <- lapply(CAR_MA[CAR_MA$all_stock == 1,
+                                      names(CAR_MA) %in% vars.for.model], mean)
+
+difference.means[2,] <- lapply(CAR_MA[CAR_MA$all_stock == 0,
+                                      names(CAR_MA) %in% vars.for.model], mean)
+
+difference.means[3,] <- difference.means[1,] - difference.means[2,]
+
+for (v in vars.for.model){
+  pval <- t.test(CAR_MA[CAR_MA$all_stock == 1,v],
+                 CAR_MA[CAR_MA$all_stock == 0,v])$p.value
+  difference.means[4,v] <- pval
+}
 
 # STEP 4 -----------------------------------------------------------------------
 #       (Regression table)
