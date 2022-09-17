@@ -1,13 +1,10 @@
-# Assignment 1 
-
-
 # SETUP ------------------------------------------------------------------------
 setwd('C:/Users/steef/Documents/NHH/FIE401 Financial Econometrics/Fin-Econ-Assignment-1')
 load('CAR_M&A.RData')
 
 # Libraries
 library(ggplot2)
-# library(RColorBrewer)
+library(RColorBrewer)
 library(tidyverse)
 library(stargazer)
 library(corrplot)
@@ -19,7 +16,7 @@ mytheme <-
         panel.grid.minor = element_blank())
 
 # STEP 1 -----------------------------------------------------------------------
-# Familiarize yourself with the data
+#       (Summary statistics & Exploratory analysis)
 
 # Select the variables that we need *****************************************************************
 
@@ -34,11 +31,11 @@ binary.vars <- c('public', 'private', 'tender_offer', 'all_stock', 'hostile',
 
 stargazer(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy',binary.vars)], 
           type = 'latex', header = FALSE, 
-          summary.stat = c('min','p25','mean','p75','max','sd'))
+          summary.stat = c('min','p25','mean','p75', 'max','sd'))
 
 # Are there outliers? Evaluate if you should winsorize the data.
 ggplot(CAR_MA, aes(deal_value)) +
-  geom_histogram(bins = 30) +
+  geom_histogram(bins = 30, fill = brewer.pal(11,'PiYG')[2]) +
   mytheme # MAKE GRADIENT ****************************************************************************************
 
 ggplot(CAR_MA, aes(y = deal_value)) +
@@ -49,8 +46,8 @@ quantile(CAR_MA$bidder_size)
 
 
 # STEP 2 -----------------------------------------------------------------------
-# For each year in the sample, report the average deal size, bidder CAR, share 
-# of deals with private targets, and share of deals fully paid in stock.
+#       (Average values by year)
+
 CAR_MA %>%
   group_by(yyyy) %>% # group by year
   summarise(Avg_deal_size = mean(deal_value),
@@ -59,10 +56,7 @@ CAR_MA %>%
             Share_of_deals_fully_stock = mean(all_stock))
 
 # STEP 3 -----------------------------------------------------------------------
-# By methods of payment (fully paid by stock or not), report the average of 
-# all variables you include in your regression model. Report the difference 
-# in means for both sub-samples and the associated p-value 
-# (t-test; text book page 119-120).
+#       (Average values by method of payment & t-tests)
 
 vars.for.model <- names(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy', 
                                                      'private', 'all_stock')])
