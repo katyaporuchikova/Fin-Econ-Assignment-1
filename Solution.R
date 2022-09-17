@@ -21,16 +21,20 @@ mytheme <-
 # STEP 1 -----------------------------------------------------------------------
 # Familiarize yourself with the data
 
-# Select the variables that we need
+# Select the variables that we need *****************************************************************
 
-
-
-summary(CAR_MA)
-stargazer(CAR_MA, type = 'latex', header = FALSE)
 
 # Variables public and private contain the same information
 # Date variables are stored as numbers; factor variables are stored as numeric
 CAR_MA$yyyymmdd <- as.Date(as.character(CAR_MA$yyyymmdd), format = '%Y%m%d')
+
+# Binary variables are stored as numerical
+binary.vars <- c('public', 'private', 'tender_offer', 'all_stock', 'hostile',
+                 'horz')
+
+stargazer(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy',binary.vars)], 
+          type = 'latex', header = FALSE, 
+          summary.stat = c('min','p25','mean','p75','max','sd'))
 
 # Are there outliers? Evaluate if you should winsorize the data.
 ggplot(CAR_MA, aes(deal_value)) +
@@ -39,8 +43,7 @@ ggplot(CAR_MA, aes(deal_value)) +
 
 ggplot(CAR_MA, aes(y = deal_value)) +
   geom_boxplot()
-
-
+quantile(CAR_MA$bidder_size)
 
 # Are there some mistakes in the data? Evaluate to make adjustments to the data.
 
