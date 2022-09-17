@@ -10,6 +10,7 @@ library(ggplot2)
 # library(RColorBrewer)
 library(tidyverse)
 library(stargazer)
+library(corrplot)
 
 # Functions, colors and themes
 mytheme <- 
@@ -68,9 +69,43 @@ CAR_MA %>%
 # STEP 4 -----------------------------------------------------------------------
 #       (Regression table)
 
+# Check correlations for potential multicolliniarity
+correlations <- cor(CAR_MA[!names(CAR_MA) %in% 'yyyymmdd'])
+corrplot(correlations, col = COL2('PiYG'), tl.col = 'black')
 
+# Full sample - no controls
+model1 <- lm(carbidder ~ all_stock + public + I(all_stock*public), CAR_MA) 
+summary(model1)
+# Full sample - controls
+model2 <- lm(carbidder ~ all_stock + public + I(all_stock*public) + 
+               deal_value + bidder_size + bidder_mtb + run_up_bidder + 
+               bidder_fcf + bidder_lev + sigma_bidder + relsize + horz + 
+               tender_offer + hostile,
+             CAR_MA)
+summary(model2)
 
-# Binary variables are stored as numerical => change to factor
-factor_var <- c('public', 'private', 'tender_offer', 'all_stock', 'hostile',
-                'horz') 
-CAR_MA[factor_var] <- lapply(CAR_MA[factor_var], as.factor)
+# Only Only public - no controls
+model3 <- lm(carbidder ~ all_stock, CAR_MA[CAR_MA$public == 1,]) 
+summary(model3)
+# Only Only public - controls
+model4 <- lm(carbidder ~ all_stock + deal_value + bidder_size + bidder_mtb + 
+               run_up_bidder + bidder_fcf + bidder_lev + sigma_bidder + 
+               relsize + horz + tender_offer + hostile,
+             CAR_MA[CAR_MA$public == 1,])
+summary(model4)
+
+# Only Only public - no controls
+model5 <- lm(carbidder ~ all_stock, CAR_MA[CAR_MA$public == 0,]) 
+summary(model3)
+# Only Only public - controls
+model6 <- lm(carbidder ~ all_stock + deal_value + bidder_size + bidder_mtb + 
+               run_up_bidder + bidder_fcf + bidder_lev + sigma_bidder + 
+               relsize + horz + tender_offer + hostile,
+             CAR_MA[CAR_MA$public == 0,])
+summary(model6)
+
+stargazer(model1, model2, model3, model4, model5, model6,
+          keep.stat = c('n','adj.rsq'),
+          type = 'latex', header = FALSE, digits = 3,
+          notes.append = TRUE, notes.align = 'l', font.size = 'small',
+          notes = 'Notes with explanations?')
