@@ -119,6 +119,8 @@ summary(model6)
 
 stargazer(model1, model2, model3, model4, model5, model6,
           keep.stat = c('n','adj.rsq'),
-          type = 'latex', header = FALSE)
+          type = 'latex', header = FALSE, digits = 3,
+          notes.append = TRUE, notes.align = 'l', font.size = 'small',
+          notes = 'Notes with explanations?')
 ```
 
