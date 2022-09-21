@@ -252,7 +252,7 @@ model4 <-
        relsize +
        horz +
        tender_offer +
-       year+
+       year + # ********************************************************** Add as FE
        hostile,
      CAR_MA[CAR_MA$public == 0,])
 # summary(model4)
@@ -271,7 +271,7 @@ model5 <-
        relsize +
        horz +
        tender_offer +
-       year+
+       year + # ********************************************************** Add as FE
        hostile,
      CAR_MA[CAR_MA$public == 1,])
 # summary(model5)
@@ -292,7 +292,7 @@ model6 <-
                  relsize +
                  horz + 
                  tender_offer +
-                 year+
+                 year + # ********************************************************** Add as FE
                  hostile,
                  CAR_MA)
 # summary(model6)
