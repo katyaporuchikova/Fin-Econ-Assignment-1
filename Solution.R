@@ -39,7 +39,7 @@ binary.vars <- c('public', 'private', 'tender_offer', 'all_stock', 'hostile',
                  'horz')
 
 stargazer(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy',binary.vars)], 
-          type = 'latex', header = FALSE, 
+          type = 'latex', header = "Summary", 
           summary.stat = c('min','p25','mean','p75', 'max','sd'))
 
 # Are there outliers? Evaluate if you should winsorize the data:
