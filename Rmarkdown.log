@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.21)  21 SEP 2022 20:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.21)  21 SEP 2022 22:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -317,6 +317,12 @@ LaTeX Warning: Label `fig:figs' multiply defined.
 LaTeX Warning: Label `' multiply defined.
 
 
+LaTeX Warning: Label `' multiply defined.
+
+
+LaTeX Warning: Label `' multiply defined.
+
+
 LaTeX Warning: Label `fig:figs' multiply defined.
 
 
@@ -429,62 +435,73 @@ Overfull \hbox (38.8555pt too wide) in paragraph at lines 93--109
  [][] 
  []
 
-<Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf, id=12, 650.43pt x 361.35pt>
+<Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf, id=44, 650.43pt x 361.35pt>
 File: Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf>
-Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 115.
+Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 129.
 (pdftex.def)             Requested size: 469.76817pt x 260.98232pt.
-<Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf, id=13, 650.43pt x 361.35pt>
+<Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf, id=45, 650.43pt x 361.35pt>
 File: Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 128.
+Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 137.
 (pdftex.def)             Requested size: 469.76817pt x 260.98232pt.
-<Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf, id=14, 650.43pt x 361.35pt>
+<Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf, id=46, 650.43pt x 361.35pt>
 File: Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
 <use Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf>
-Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 136.
+Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf  used on input line 145.
 (pdftex.def)             Requested size: 469.76817pt x 260.98232pt.
-<Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf, id=15, 650.43pt x 361.35pt>
+[1
+
+{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf> <./Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf>]
+<Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf, id=81, 650.43pt x 361.35pt>
 File: Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 147.
+Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf  used on input line 156.
 (pdftex.def)             Requested size: 469.76817pt x 260.98232pt.
-<Rmarkdown_files/figure-latex/unnamed-chunk-11-1.pdf, id=16, 650.43pt x 361.35pt>
-File: Rmarkdown_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
-<use Rmarkdown_files/figure-latex/unnamed-chunk-11-1.pdf>
-Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-11-1.pdf  used on input line 191.
-(pdftex.def)             Requested size: 469.76817pt x 260.98232pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 199.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 213.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 210.
 (c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
+Overfull \hbox (31.96703pt too wide) in paragraph at lines 234--245
+ [][] 
+ []
 
-LaTeX Warning: Float too large for page by 6.23389pt on input line 263.
 
-[1
+Overfull \hbox (5.0227pt too wide) in paragraph at lines 250--261
+ [][] 
+ []
 
-{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 <./Rmarkdown_files/figure-latex/unnamed-chunk-3-1.pdf> <./Rmarkdown_files/figure-latex/unnamed-chunk-5-1.pdf>] [3 <./Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf> <./Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf>] [4 <./Rmarkdown_files/figure-latex/unnamed-chunk-11-1.pdf>] [5] (./Rmarkdown.aux)
+<Rmarkdown_files/figure-latex/unnamed-chunk-12-1.pdf, id=82, 505.89pt x 505.89pt>
+File: Rmarkdown_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
+<use Rmarkdown_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: Rmarkdown_files/figure-latex/unnamed-chunk-12-1.pdf  used on input line 273.
+(pdftex.def)             Requested size: 469.76265pt x 469.76265pt.
+[3 <./Rmarkdown_files/figure-latex/unnamed-chunk-7-1.pdf>] [4 <./Rmarkdown_files/figure-latex/unnamed-chunk-8-1.pdf>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 294.
+
+LaTeX Warning: Float too large for page by 19.17831pt on input line 359.
+
+[5] [6 <./Rmarkdown_files/figure-latex/unnamed-chunk-12-1.pdf>] [7] [8] (./Rmarkdown.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Rmarkdown.out' has not changed.
-(rerunfilecheck)             Checksum: 24C9E2C605428CE051A8F733C4EBD947;350.
+(rerunfilecheck)             Checksum: 434089C11B9FE824646180CD9336058E;1376.
  ) 
 Here is how much of TeX's memory you used:
- 10541 strings out of 477035
- 167176 string characters out of 5826726
- 539833 words of memory out of 5000000
- 31492 multiletter control sequences out of 15000+600000
- 523190 words of font info for 73 fonts, out of 8000000 for 9000
+ 10583 strings out of 477035
+ 167707 string characters out of 5826726
+ 532165 words of memory out of 5000000
+ 31512 multiletter control sequences out of 15000+600000
+ 526553 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,10n,77p,314b,439s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri9.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy9.pfb>
-Output written on Rmarkdown.pdf (5 pages, 726752 bytes).
+ 72i,10n,77p,314b,508s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi9.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri9.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb><c:/Users/steef/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy9.pfb>
+Output written on Rmarkdown.pdf (8 pages, 745920 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
- 18 named destinations out of 1000 (max. 500000)
- 42 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 231 PDF objects out of 1000 (max. 8388607)
+ 180 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
