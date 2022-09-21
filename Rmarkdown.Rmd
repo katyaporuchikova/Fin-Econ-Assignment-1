@@ -58,6 +58,9 @@ stargazer(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy',binary.vars)],
 ```
 
 **Comments on the Table 1**
+Even a simple summary of the data shows that there are outliers in the data, for example by large differences in mean and median or between maximum value and 3rd quantile. Outliers are a significant problem in empirical research because they can cause biased regression coefficients. Two obvious outliers from the summary are deal value and bidder size.
+
+There are statistical tools to find outliers, one of the most famous methods in regression setting is Cook`s distance, which basically is a summary on how much the regression outcome changes when specific observations are removed.  We however will rely on plots, which is also a good way to find outliers in the data. In this case we plotted a scatterplot of the variable to see whether observations are distant from others. This can be clearly seen with the deal value and bidder size.  Overall, there seem to be other “smaller” outliers. 
 
 ```{r}
 # Are there outliers? Evaluate if you should winsorize the data:
@@ -86,10 +89,7 @@ grid.arrange(plot1, plot2, ncol=2)
 ```
 
 **Comments to figure 1**
-just by looking at the scatterplot we indicate a huge outlier 
-This could be an error but nonetheless should be removed from the dataset   
-overall there seem to be other "smaller" outliers and we therefore have to winsorize or use log-transformation 
-because of the shape of the historgram we decided to use log-transformations 
+
 
 ```{r}
 # bidder_size
@@ -172,6 +172,7 @@ grid.arrange(plot2, plot2.0, ncol=2)
 ```
 
 
+# Descriptive table 1 
 ```{r results='asis'}
 # STEP 2 -----------------------------------------------------------------------
 #       (Average values by year)
@@ -190,8 +191,15 @@ summary1 <-
 
 stargazer(summary1, summary = FALSE, type = 'latex', header = FALSE)
 ```
+**Comments descriptive table 1**
 
+This table displays the average deal size, carbidder, share of deals with private firms, and share of deals fully paid in stock per year in the data. Key insights in this table: 
+- The average deal size went up in the period. Especially in 2014. This can indicate some extreme values that should be winsorized out. But is also to some extent expected because of economic growth. 
+- The abnormal returns have varied from –0,0212 to 0,0425. Returns have a straightforward effect on wealth, therefore give good information about research questions about the wealth of bidder shareholders 
+- The share of deals with private targets have had a relatively stable percentage over the period under investigation.
+- The biggest change in the table is the share of deals fully paid in stock. This share was stable from 1990-1999 (around 50%), but from 1999-2014 we see a steep decrease in this share. The period ended in just 17%.  This is beneficial to find an insight of the methods of payment and answer that research question. 
 
+# Descriptive table 2 
 ```{r}
 # STEP 3 -----------------------------------------------------------------------
 #       (Average values by method of payment & t-tests)
@@ -221,8 +229,18 @@ for (v in vars.for.model){
   difference.means[4,v] <- pval
 }
 ```
+** Comments descriptive table 2 **
+- test
+- test
+- test
+- 
+# Regression
 
+## Correlation Plot
 ```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Correlation plot"}
+
+
+
 # STEP 4 -----------------------------------------------------------------------
 #       (Regression table)
 
@@ -230,7 +248,12 @@ for (v in vars.for.model){
 correlations <- cor(CAR_MA[!names(CAR_MA) %in% 'yyyymmdd'])
 corrplot(correlations, col = COL2('PiYG'), tl.col = 'black')
 ```
+** Comments on Correlation Plot**
+As we can observe, the correlation between bidder size and deal value is high relative to many of the other observations. As bigger firms tend to have higher incomes and sometimes larger cash reserves, they can also buy other big firms, resulting in higher values on deals. 
 
+The variables “public” and “private” have a highly negative correlation mainly due to the fact that they represent the direct opposite of each other. 
+
+## Regression table
 ```{r results='asis'}
 # run regressions 
 
@@ -321,4 +344,23 @@ stargazer(model1, model2, model3, model4, model5, model6,
           notes = 'Notes with explanations?') # add notes ***************************************************
 
 ```
+** Comments on regression table**
+- Variable all_stocks always statistically significant on 1% level.
+- Also economically significant, if payment procedure is done by buying all stocks ( all_stocks=1) then abnormal return of bidder increases by 0,014 (1,4%), which makes a difference with big numbers in play.  
+- Looking at regressions 5 and 6 we see that different effect of all_stocks, this shows that it makes a difference whether we look at public companies or private companies.
+- Therefore regression 6 is our best model in explaining the effect of all_stocks  
+- However, we are not too confident that this result is unbiased, probably omitted variable bias is still a problem. We would industry fixed effects. 
+- And since the adjusted Rsquare is very low (0,061) our model does not seem to fit well
+- We have adjusted R^2 ranging from 0,003-0,085. A low adjusted R^2 indicated that our models does not explain much of the variation in carbidder return. If we had a relatively high R^2 (70%<), we would be able to construct an almost perfect event in which we maximized carbidder abnormal return. Since there are several factors included her, and a few other variables that could cast a light on the research question, a low adjusted R^2 is reasonable, and thus indicates that our models are consistent with reality and literature
+- We think we found a relevant effect of interest but would still be completely confident about it. For example, we would have liked to include an industry variable. 
+- From regression 3 we discover that if the deal is done in all stocks, the carbidder abnormal return increases by 1,4%. If the deal is done in all stock, and with a public company, this increase is neutralized by a decrease on 1,9% from the public company. This is supported by the signal effect, where if a company is set to by a large percentage, or a company in its entirety, the Share price will go up as a result of a signal that the company is doing well, and a lack of shares available in the market. This will then again result in higher total price for the “carbidder”. This supports the research question that the payment method has an effect on carbidder value. 
 
+# Additional Questions 
+
+## Questions 1 
+** Can you include both a dummy for private and public targets in the regression?**
+We cannot include both dummy variables in the regression, as we will encounter the “dummy variable trap”. The dummy variable trap is when two or more variables created by on-hot encoding are highly correlated. This causes perfect multicollinearity, which means that we can’t measure the betas correctly. Multicollinearity appears when one or more independent variables can be written as a perfect linear combination of one or more of the independent variables. The solution is by omitting one of the dummy variables. As firms either are publicly traded or private, including both dummy variables will cause multicollinearity and false betas
+
+## Question 2 
+** If you limit the sample to private deals, what’s the coefficient on the hostile variable?** 
+If we limit the sample to private deals, the coefficient on the hostile variable will be zero. A hostile takeover can only happen to a public company. In a hostile takeover, the acquirer attempts to take over a company (the target company) against the wishes from the management in the target company. This can be done by going directly to the target company’s shareholders or fight to replace the management.  
