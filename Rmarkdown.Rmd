@@ -1,5 +1,7 @@
 ---
-title: 'FIE401 - First assignment M&A and Method of Payment'
+title:  |  
+        | FIE401 - First assignment 
+        | M&A and Method of Payment
 author: 'Group 8'
 date: '`r Sys.Date()`'
 output: 
@@ -65,14 +67,18 @@ plot1 <-
   ggplot(aes(x = yyyy,y = deal_value))+
   geom_point(color = brewer.pal(11,'PiYG')[10]) +
   geom_point(data = CAR_MA[2558,], color = brewer.pal(11,'PiYG')[2]) +
-  mytheme
+  mytheme +
+  labs(x = 'Year',
+       y = 'Deal value')
 
 plot2 <- 
   CAR_MA %>%   
   ggplot(aes(deal_value))+
   geom_histogram(bins = 30,
                  fill = brewer.pal(11,'PiYG')[2]) +
-  mytheme 
+  mytheme +
+  labs(x = 'Deal value',
+       y = 'Frequency')
 ```
 
 ```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and histogram of deal value"}
@@ -91,7 +97,9 @@ plot3 <-
   CAR_MA %>% 
   ggplot(aes(x = yyyy, y = bidder_size))+
   geom_point(color = brewer.pal(11,'PiYG')[10]) +
-  mytheme
+  mytheme +
+  labs(x = 'Year',
+       y = 'Bidder size')
 
 plot4 <- 
   CAR_MA %>%   
@@ -100,7 +108,9 @@ plot4 <-
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) +
-  mytheme
+  mytheme +
+  labs(x = '',
+       y = 'Bidder size')
 ```
 
 ```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder size"}
@@ -115,7 +125,9 @@ plot5 <-
   CAR_MA %>% 
   ggplot(aes(x=yyyy, y = bidder_mtb))+
   geom_point(color = brewer.pal(11,'PiYG')[10]) +
-  mytheme
+  mytheme +
+  labs(x = 'Year',
+       y = 'Bidder market-to-book ratio')
 
 # bidder book to market 
 plot6 <- 
@@ -125,7 +137,9 @@ plot6 <-
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
-  mytheme
+  mytheme +
+  labs(x = '',
+       y = 'Bidder market-to-book ratio')
 ```
 
 ```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder book-to-market ratio"}
@@ -150,7 +164,9 @@ plot2.0 <-
   ggplot(aes(deal_value))+
   geom_histogram(bins = 30,
                  fill = brewer.pal(11,'PiYG')[10]) +
-  mytheme 
+  mytheme +
+  labs(x = 'Deal value',
+       y = 'Frequency')
 
 grid.arrange(plot2, plot2.0, ncol=2)
 ```
