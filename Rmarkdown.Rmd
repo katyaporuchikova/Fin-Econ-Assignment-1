@@ -36,7 +36,7 @@ mytheme <-
         panel.grid.minor = element_blank())
 ```
 
-# Question 1
+# Exploratory analysis and outlier detection
 
 ```{r summary-stats, echo=FALSE, results='asis'}
 # STEP 1 -----------------------------------------------------------------------
@@ -62,7 +62,7 @@ stargazer(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy',binary.vars)],
 # Deal_value:
 plot1 <- 
   CAR_MA %>% 
-  ggplot(aes(x=yyyy,y=deal_value))+
+  ggplot(aes(x = yyyy,y = deal_value))+
   geom_point(color = brewer.pal(11,'PiYG')[10]) +
   geom_point(data = CAR_MA[2558,], color = brewer.pal(11,'PiYG')[2]) +
   mytheme
@@ -71,7 +71,7 @@ plot2 <-
   CAR_MA %>%   
   ggplot(aes(deal_value))+
   geom_histogram(bins = 30,
-                 fill = brewer.pal(11,'PiYG')[10]) +
+                 fill = brewer.pal(11,'PiYG')[2]) +
   mytheme 
 ```
 
@@ -85,76 +85,78 @@ This could be an error but nonetheless should be removed from the dataset
 overall there seem to be other "smaller" outliers and we therefore have to winsorize or use log-transformation 
 because of the shape of the historgram we decided to use log-transformations 
 
-```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder size"}
+```{r}
 # bidder_size
 plot3 <- 
   CAR_MA %>% 
-  ggplot(aes(x=yyyy, y=bidder_size))+
-  geom_point() +
+  ggplot(aes(x = yyyy, y = bidder_size))+
+  geom_point(color = brewer.pal(11,'PiYG')[10]) +
   mytheme
 
 plot4 <- 
   CAR_MA %>%   
-  ggplot(aes(x=factor(0),bidder_size))+
-  geom_boxplot()+
+  ggplot(aes(x = factor(0), bidder_size))+
+  geom_boxplot(alpha = 0.5, color = brewer.pal(11,'PiYG')[2]) +
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) +
   mytheme
+```
 
+```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder size"}
 grid.arrange(plot3,plot4,ncol=2)
 ```
+
+**Comments to figure 2**
+
 
 ```{r}
 plot5 <- 
   CAR_MA %>% 
-  ggplot(aes(x=yyyy, y=bidder_mtb))+
-  geom_point() +
+  ggplot(aes(x=yyyy, y = bidder_mtb))+
+  geom_point(color = brewer.pal(11,'PiYG')[10]) +
   mytheme
 
 # bidder book to market 
 plot6 <- 
   CAR_MA %>%   
   ggplot(aes(x=factor(0),bidder_mtb))+
-  geom_boxplot()+
+  geom_boxplot(alpha = 0.5, color = brewer.pal(11,'PiYG')[2]) +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
   mytheme
+```
 
-grid.arrange(plot3,plot4,ncol=2)
-# seems suspicious to be an error 
-# but we believe the reason for high values only in year 2000 
-# is the dotcom bubble 
+```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder book-to-market ratio"}
+grid.arrange(plot5,plot6,ncol=2)
+```
+
+**Comments to figure 3**
+Seems suspicious to be an error but we believe the reason for high values only in year 2000 is the dotcom bubble 
 
 
-# adjust data 
-# adjust data 
+```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Deal size histogram before and after log-transformation"}
+# Deal with outliers
 CAR_MA <- 
   CAR_MA %>%
   rename(year = yyyy) %>% 
-  slice(-(2558)) %>%                    # to get rid of extreme outlier
+  slice(-(2558)) %>%  # to get rid of extreme outlier
   mutate(deal_value = log(deal_value),
          bidder_size = log(bidder_size))
 
-# as we see now, log-tranformation solved the outlier problem 
-plot1 <- 
-  CAR_MA %>% 
-  ggplot(aes(x=year,y=deal_value))+
-  geom_point() +
-  mytheme
-
-plot2 <- 
+plot2.0 <- 
   CAR_MA %>%   
   ggplot(aes(deal_value))+
   geom_histogram(bins = 30,
-                 fill = brewer.pal(11,'PiYG')[2]) +
+                 fill = brewer.pal(11,'PiYG')[10]) +
   mytheme 
 
-grid.arrange(plot1, plot2, ncol=2)
+grid.arrange(plot2, plot2.0, ncol=2)
+```
 
 
-
+```{r results='asis'}
 # STEP 2 -----------------------------------------------------------------------
 #       (Average values by year)
 
@@ -170,10 +172,11 @@ summary1 <-
             avg_share_private = round(mean(share_private), digits=3),
             avg_share_stock = round(mean(share_stock), digits = 3))
 
-stargazer(summary1,summary = FALSE, type = 'latex', header = FALSE)
+stargazer(summary1, summary = FALSE, type = 'latex', header = FALSE)
+```
 
 
-
+```{r}
 # STEP 3 -----------------------------------------------------------------------
 #       (Average values by method of payment & t-tests)
 
@@ -201,27 +204,30 @@ for (v in vars.for.model){
                  CAR_MA[CAR_MA$all_stock == 0,v])$p.value
   difference.means[4,v] <- pval
 }
+```
 
+```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Correlation plot"}
 # STEP 4 -----------------------------------------------------------------------
 #       (Regression table)
 
 # Check correlations for potential multicolliniarity
 correlations <- cor(CAR_MA[!names(CAR_MA) %in% 'yyyymmdd'])
 corrplot(correlations, col = COL2('PiYG'), tl.col = 'black')
+```
 
+```{r results='asis'}
 # run regressions 
 
 # Only public - no controls
 model1 <- 
   lm(carbidder ~ all_stock, CAR_MA[CAR_MA$public == 0,]) 
-summary(model1)
+# summary(model1)
 
 # Only private - no controls
 model2 <- 
   lm(carbidder ~ all_stock,
      CAR_MA[CAR_MA$public == 1,]) 
-summary(model2)
-
+# summary(model2)
 
 
 # Full sample - no controls
@@ -230,7 +236,7 @@ model3 <-
                  public +
                  I(all_stock*public),
                  CAR_MA) 
-summary(model3)
+# summary(model3)
 
 
 # Only public - controls
@@ -249,7 +255,7 @@ model4 <-
        year+
        hostile,
      CAR_MA[CAR_MA$public == 0,])
-summary(model4)
+# summary(model4)
 
 
 # Only private - controls
@@ -268,7 +274,7 @@ model5 <-
        year+
        hostile,
      CAR_MA[CAR_MA$public == 1,])
-summary(model5)
+# summary(model5)
 
 
 # Full sample - controls
@@ -289,9 +295,7 @@ model6 <-
                  year+
                  hostile,
                  CAR_MA)
-summary(model6)
-
-
+# summary(model6)
 
 
 stargazer(model1, model2, model3, model4, model5, model6,
