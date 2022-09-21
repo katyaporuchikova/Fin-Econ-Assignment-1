@@ -57,8 +57,7 @@ stargazer(CAR_MA[!names(CAR_MA) %in% c('yyyymmdd','yyyy',binary.vars)],
           summary.stat = c('min','p25','mean','p75', 'max','sd'))
 ```
 
-**Comments on the Table 1**
-Even a simple summary of the data shows that there are outliers in the data, for example by large differences in mean and median or between maximum value and 3rd quantile. Outliers are a significant problem in empirical research because they can cause biased regression coefficients. Two obvious outliers from the summary are deal value and bidder size.
+**Table 1** presents summary statistics of the dataset. Even a simple summary of the data shows that there are outliers in the data, for example by large differences in mean and median or between maximum value and 3rd quantile. Outliers are a significant problem in empirical research because they can cause biased regression coefficients. Two obvious outliers from the summary are deal value and bidder size.
 
 There are statistical tools to find outliers, one of the most famous methods in regression setting is Cook`s distance, which basically is a summary on how much the regression outcome changes when specific observations are removed.  We however will rely on plots, which is also a good way to find outliers in the data. In this case we plotted a scatterplot of the variable to see whether observations are distant from others. This can be clearly seen with the deal value and bidder size.  Overall, there seem to be other “smaller” outliers. 
 
@@ -84,12 +83,9 @@ plot2 <-
        y = 'Frequency')
 ```
 
-```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and histogram of deal value"}
+```{r fig-dv, fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and histogram of deal value"}
 grid.arrange(plot1, plot2, ncol=2)
 ```
-
-**Comments to figure 1**
-
 
 ```{r}
 # bidder_size
@@ -113,11 +109,10 @@ plot4 <-
        y = 'Bidder size')
 ```
 
-```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder size"}
+```{r fig-bs, fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder size"}
 grid.arrange(plot3,plot4,ncol=2)
 ```
-
-**Comments to figure 2**
+**Figure 1** demonstrates that the distribution of the deal value variable is highly skewed. As the values are non-negative, we use log-transformation to correct it. Similar pattern with a number of extremely high values can be observed in bidder size variable, demonstrated by **Figure 2**. We correct it we using log-transformation as well. **Figure 4** demonstrates how log-transformation affects the distribution of the deal value variable. **Figure 3** shows a spike in bidder book-to-market ration, which could be a potential error in the data, however we believe the reason for high values only in year 2000 is the dotcom bubble.
 
 
 ```{r}
@@ -142,15 +137,11 @@ plot6 <-
        y = 'Bidder market-to-book ratio')
 ```
 
-```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder book-to-market ratio"}
+```{r fig-bm, fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Scatterplot and boxplot of bidder book-to-market ratio"}
 grid.arrange(plot5,plot6,ncol=2)
 ```
 
-**Comments to figure 3**
-Seems suspicious to be an error but we believe the reason for high values only in year 2000 is the dotcom bubble 
-
-
-```{r fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Deal size histogram before and after log-transformation"}
+```{r fig-distr, fig.width = 9, fig.height = 5,fig.cap="\\label{fig:figs}Deal size histogram before and after log-transformation"}
 # Deal with outliers
 CAR_MA <- 
   CAR_MA %>%
@@ -170,7 +161,7 @@ plot2.0 <-
 
 grid.arrange(plot2, plot2.0, ncol=2)
 ```
-
+\newpage
 
 # Descriptive table 1 
 ```{r results='asis'}
@@ -192,9 +183,7 @@ summary1 <-
 stargazer(summary1, summary = FALSE, type = 'latex', header = FALSE,
           title = 'Mean values: time effects')
 ```
-**Comments descriptive table 1**
-
-This table displays the average deal size, carbidder, share of deals with private firms, and share of deals fully paid in stock per year in the data. Key insights in this table: 
+**Table 2** displays the average deal size, carbidder, share of deals with private firms, and share of deals fully paid in stock per year in the data. Key insights in this table: 
 
 - The average deal size went up in the period. Especially in 2014. This can indicate some extreme values that should be winsorized out. But is also to some extent expected because of economic growth. 
 - The abnormal returns have varied from –0,0212 to 0,0425. Returns have a straightforward effect on wealth, therefore give good information about research questions about the wealth of bidder shareholders 
@@ -202,6 +191,7 @@ This table displays the average deal size, carbidder, share of deals with privat
 - The biggest change in the table is the share of deals fully paid in stock. This share was stable from 1990-1999 (around 50%), but from 1999-2014 we see a steep decrease in this share. The period ended in just 17%.  This is beneficial to find an insight of the methods of payment and answer that research question. 
 
 # Descriptive table 2 
+
 ```{r}
 # STEP 3 -----------------------------------------------------------------------
 #       (Average values by method of payment & t-tests)
@@ -234,17 +224,17 @@ for (v in vars.for.model){
 
 ```{r results='asis'}
 stargazer(difference.means[,c(1:7)], summary = FALSE, type = 'latex', header = FALSE, 
-          title = 'Difference in means between all stock and not all stock')
-stargazer(difference.means[,c(8:14)], summary = FALSE, type = 'latex', header = FALSE,
-          title = 'Difference in means between all stock and not all stock - continued')
-```
+          title = 'Difference in means between all stock and not all stock', float = FALSE)
 
-**Comments descriptive table 2 **
+stargazer(difference.means[,c(8:14)], summary = FALSE, type = 'latex', header = FALSE,
+          title = 'Difference in means between all stock and not all stock - continued', float = FALSE)
+```
 
 # Regression
 
 ## Correlation Plot
-```{r fig.width = 7, fig.height = 7,fig.cap="\\label{fig:figs}Correlation plot"}
+
+```{r fig-cor, fig.width = 7, fig.height = 7,fig.cap="\\label{fig:figs}Correlation plot"}
 
 
 
@@ -256,10 +246,7 @@ correlations <- cor(CAR_MA[!names(CAR_MA) %in% 'yyyymmdd'])
 corrplot(correlations, col = COL2('PiYG'), tl.col = 'black')
 ```
 
-**Comments on Correlation Plot**
-As we can observe, the correlation between bidder size and deal value is high relative to many of the other observations. As bigger firms tend to have higher incomes and sometimes larger cash reserves, they can also buy other big firms, resulting in higher values on deals. 
-
-The variables “public” and “private” have a highly negative correlation mainly due to the fact that they represent the direct opposite of each other. 
+**Figure 5** shows the correlations between variables. The correlation between bidder size and deal value is high relative to many of the other observations. As bigger firms tend to have higher incomes and sometimes larger cash reserves, they can also buy other big firms, resulting in higher values on deals. The variables “public” and “private” have a highly negative correlation mainly due to the fact that they represent the direct opposite of each other. 
 
 ## Regression table
 
@@ -354,7 +341,7 @@ stargazer(model1, model2, model3, model4, model5, model6,
           'models (2) and (5) contain subsample consisting of only public.'))
 ```
 
-**Comments on regression table**
+**Table 5** presents results of 6 linear regressions.
 - Variable all_stocks always statistically significant on 1% level.
 
 - Also economically significant, if payment procedure is done by buying all stocks ( all_stocks=1) then abnormal return of bidder increases by 0,014 (1,4%), which makes a difference with big numbers in play.  
