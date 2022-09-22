@@ -196,6 +196,9 @@ stargazer(summary1, summary = FALSE, type = 'latex', header = FALSE,
 
 # Descriptive table 2 
 
+**Comment Descriptive table 2**
+- All variables but carbidder,horz and relsize are statistically significant. Meaning the hypothesis that the difference between observations with all.stock and observations with not all.stock equals zero can be rejected for all but these 3 variables
+- gives a hint that there exists an effect of all.stock mergers before the regression analyis 
 ```{r}
 # STEP 3 -----------------------------------------------------------------------
 #       (Average values by method of payment & t-tests)
