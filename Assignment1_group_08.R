@@ -17,12 +17,13 @@ library(gridExtra) # for combining graphs
 library(lubridate) # for ymd function 
 library(knitr)
 
-knitr::purl(input = 'Assignment1_group_08.Rmd', output = 'Assignment1_group_08.R')
-
 mytheme <- 
   theme_minimal() +
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank())
+
+# Extract code from Rmd
+# knitr::purl(input = 'Assignment1_group_08.Rmd', output = 'Assignment1_group_08.R')
 
 
 ## ----summary-stats, echo=FALSE, results='asis'------------------------------------------------------------------------
@@ -174,7 +175,7 @@ difference.means <- data.frame(matrix(NA,    # Create empty data frame
                                       ncol = length(vars.for.model)))
 
 row.names(difference.means) <- c('all.stock', 'not.all.stock', 'differece', 
-                                 't-test')
+                                 'p-value, t-test')
 names(difference.means) <- vars.for.model
 
 difference.means[1,] <- lapply(CAR_MA[CAR_MA$all_stock == 1,
@@ -193,11 +194,11 @@ for (v in vars.for.model){
 
 
 ## ----results='asis'---------------------------------------------------------------------------------------------------
-stargazer(difference.means[,c(1:7)], summary = FALSE, type = 'latex', header = FALSE, 
-          title = 'Difference in means between all stock and not all stock', float = FALSE)
+stargazer(difference.means[,c(1:7)], summary = FALSE, type = 'latex', header = FALSE,
+          title = 'Difference in means between all stock and not all stock')
 
-stargazer(difference.means[,c(8:14)], summary = FALSE, type = 'latex', header = FALSE,
-          title = 'Difference in means between all stock and not all stock - continued', float = FALSE)
+stargazer(difference.means[,c(8:14)], summary = FALSE, type = 'latex', header = FALSE, 
+          title = 'Difference in means between all stock and not all stock - continued')
 
 
 ## ----fig-cor, fig.width = 7, fig.height = 7,fig.cap="\\label{fig:figs}Correlation plot"-------------------------------

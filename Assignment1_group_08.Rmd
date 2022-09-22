@@ -196,9 +196,11 @@ stargazer(summary1, summary = FALSE, type = 'latex', header = FALSE,
 
 # Descriptive table 2 
 
-**Comment Descriptive table 2**
+**Table 3** and **Table 4** present the results of the t-tests on mean of two group: all stock and not all stock.
+
 - All variables but carbidder,horz and relsize are statistically significant. Meaning the hypothesis that the difference between observations with all.stock and observations with not all.stock equals zero can be rejected for all but these 3 variables
-- gives a hint that there exists an effect of all.stock mergers before the regression analyis 
+- It gives a hint that there are differences all.stock mergers before the regression analyis 
+
 ```{r}
 # STEP 3 -----------------------------------------------------------------------
 #       (Average values by method of payment & t-tests)
@@ -211,7 +213,7 @@ difference.means <- data.frame(matrix(NA,    # Create empty data frame
                                       ncol = length(vars.for.model)))
 
 row.names(difference.means) <- c('all.stock', 'not.all.stock', 'differece', 
-                                 't-test')
+                                 'p-value, t-test')
 names(difference.means) <- vars.for.model
 
 difference.means[1,] <- lapply(CAR_MA[CAR_MA$all_stock == 1,
@@ -230,11 +232,11 @@ for (v in vars.for.model){
 ```
 
 ```{r results='asis'}
-stargazer(difference.means[,c(1:7)], summary = FALSE, type = 'latex', header = FALSE, 
-          title = 'Difference in means between all stock and not all stock', float = FALSE)
+stargazer(difference.means[,c(1:7)], summary = FALSE, type = 'latex', header = FALSE,
+          title = 'Difference in means between all stock and not all stock')
 
-stargazer(difference.means[,c(8:14)], summary = FALSE, type = 'latex', header = FALSE,
-          title = 'Difference in means between all stock and not all stock - continued', float = FALSE)
+stargazer(difference.means[,c(8:14)], summary = FALSE, type = 'latex', header = FALSE, 
+          title = 'Difference in means between all stock and not all stock - continued')
 ```
 
 # Regression
